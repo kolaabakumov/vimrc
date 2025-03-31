@@ -1,23 +1,23 @@
 #!/bin/bash
 
-# Путь к твоему локальному .vimrc
-LOCAL_VIMRC="$HOME/.vimrc_config_for_sync"
+# URL к вашему .vimrc в Gist
+VIMRC_URL="https://gist.githubusercontent.com/your-username/gist-id/raw/.vimrc"
 
-# Копируем .vimrc на удалённую машину
-cat "$LOCAL_VIMRC" > ~/.vimrc
+# Скачиваем .vimrc
+curl -fsSL "$VIMRC_URL" -o ~/.vimrc
 
-# Проверим, установлен ли Vim
+# Устанавливаем Vim, если не установлен
 if ! command -v vim &> /dev/null; then
     echo "Vim не установлен. Устанавливаю..."
     sudo apt update && sudo apt install -y vim
 fi
 
-# Проверим, установлен ли vim-plug (если хочешь плагины)
+# Установка vim-plug, если ещё не установлен
 if [ ! -f ~/.vim/autoload/plug.vim ]; then
     echo "Устанавливаю vim-plug..."
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
          https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
-# Установка плагинов (если они прописаны в .vimrc)
+# Устанавливаем плагины, если они есть
 vim +PlugInstall +qall
