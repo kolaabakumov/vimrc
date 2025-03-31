@@ -6,7 +6,6 @@ filetype plugin indent on
 
 " Общие настройки отображения
 set number              " Показывать номера строк
-set relativenumber      " Относительная нумерация (по желанию)
 set cursorline          " Подсвечивать текущую строку
 set wrap                " Переносить длинные строки
 set linebreak           " Не разрывать слова при переносе
